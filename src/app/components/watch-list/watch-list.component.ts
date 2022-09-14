@@ -27,4 +27,12 @@ export class WatchListComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  removeFromWatchList(movieId: number) : void{
+    console.log(movieId);
+    this.loading = true;
+    this.watchListApi.removeFromWatchList(movieId).subscribe(() => {
+      this.loadWatchList();
+    });
+  }
 }

@@ -10,7 +10,7 @@
       <div class="col-sm-8 text-left"> 
         <div *ngIf="watchList.length > 0">
             <div *ngFor="let item of watchList">
-                <p>Movie Title:  {{item.movieTitle}}</p>
+                <p>Movie Title:  {{item.movieTitle}} <button class="btn btn-danger" (click)="removeFromWatchList(item.movieId)">Delete</button></p>
             </div>
         </div>
       </div>
