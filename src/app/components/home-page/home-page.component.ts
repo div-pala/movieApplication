@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MovieList, Result } from 'src/app/interfaces/movies-list';
 import { MovieAPIService } from 'src/app/services/movie-api.service';
 
@@ -10,37 +10,57 @@ import { MovieAPIService } from 'src/app/services/movie-api.service';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private httpClient:HttpClient, 
-              private movieAPIService: MovieAPIService) {
+  //Properties
+  movieList : MovieList | undefined;
+  movieResults : Result[] | undefined;
+  errorMessage: string = '';
+  //Constructor
+  constructor(private movieApi: MovieAPIService, private changeDetectorRef: ChangeDetectorRef) { }
 
-  }
   ngOnInit(): void {
     this.getNowPlayingApiResponse();
   }
-  movieList: Result[] = [];
-
+  
   getNowPlayingApiResponse() {
-    this.movieAPIService.getNowPlayingMovies().subscribe((data) => {console.log(data),
+    this.movieApi.getNowPlayingMovies().subscribe((data) => {console.log(data),
        console.log(data.results),
-       this.movieList = data.results});
+       this.movieResults = data.results});
+    this.getMovieDetail();
+  }
+
+  //Methods
+  getMovieDetail() : void {
+    this.movieApi.getPopularMoviesFromSrv().subscribe(
+      res => {
+        if (res){
+          this.movieList = res;
+        }
+      }, error => {
+        this.errorMessage = error;
+      }, () => {
+        this.changeDetectorRef.detectChanges();
+        console.log(this.movieList);
+        this.movieResults = this.movieList?.results;
+      }
+    );
   }
 
   getPopularApiResponse(){
-    this.movieAPIService.getPopularMovies().subscribe((data) => {console.log(data),
+    this.movieApi.getPopularMovies().subscribe((data) => {console.log(data),
       console.log(data.results),
-      this.movieList = data.results});
+      this.movieResults = data.results});
   }
 
   getTopratedApiResponse(){
-    this.movieAPIService.getTopratedMoviesEndpoint().subscribe((data) => {console.log(data),
+    this.movieApi.getTopratedMoviesEndpoint().subscribe((data) => {console.log(data),
       console.log(data.results),
-      this.movieList = data.results});
+      this.movieResults = data.results});
   }
 
   getUpcomingApiResponse(){
-    this.movieAPIService.getUpcomingMoviesEndpoint().subscribe((data) => {console.log(data),
+    this.movieApi.getUpcomingMoviesEndpoint().subscribe((data) => {console.log(data),
       console.log(data.results),
-      this.movieList = data.results});
+      this.movieResults = data.results});
   }
 
   onOptionSelected(option:any):void{

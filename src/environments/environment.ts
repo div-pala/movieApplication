@@ -4,11 +4,13 @@
 
 export const environment = {
   production: false,
+  theMovieDbBaseUrl: "https://api.themoviedb.org/3/",
+  apiKey: "4076192d15cd9d20a1c57bb5d7ccef21",
  // nowPlayingMoviesEndpoint:'https://api.themoviedb.org/3/movie/now_playing'
-  nowPlayingMoviesEndpoint:'https://api.themoviedb.org/3/movie/now_playing?api_key=373d9fa52b137f4939b540d3074ddfba',
-  popularMoviesEndpoint:'https://api.themoviedb.org/3/movie/popular?api_key=373d9fa52b137f4939b540d3074ddfba',
-  topratedMoviesEndpoint:'https://api.themoviedb.org/3/movie/top_rated?api_key=373d9fa52b137f4939b540d3074ddfba',
-  upcomingMoviesEndpoint:'https://api.themoviedb.org/3/movie/upcoming?api_key=373d9fa52b137f4939b540d3074ddfba'  
+  nowPlayingMoviesEndpoint:'https://api.themoviedb.org/3/movie/now_playing?api_key=4076192d15cd9d20a1c57bb5d7ccef21',
+  popularMoviesEndpoint:'https://api.themoviedb.org/3/movie/popular?api_key=4076192d15cd9d20a1c57bb5d7ccef21',
+  topratedMoviesEndpoint:'https://api.themoviedb.org/3/movie/top_rated?api_key=4076192d15cd9d20a1c57bb5d7ccef21',
+  upcomingMoviesEndpoint:'https://api.themoviedb.org/3/movie/upcoming?api_key=4076192d15cd9d20a1c57bb5d7ccef21'  
 };
 
 /*
