@@ -5,9 +5,13 @@
 export const environment = {
   production: false,
   theMovieDbBaseUrl: "https://api.themoviedb.org/3/",
-  apiKey: "4076192d15cd9d20a1c57bb5d7ccef21"
+  apiKey: "4076192d15cd9d20a1c57bb5d7ccef21",
+  restDbApiKey: "63216d82fdc15b0265f173c4",
+  restDbApiBaseUrl : "https://gccapstoneproject-3872.restdb.io/rest/user-watchlist"
 };
 
+
+//https://gccapstoneproject-3872.restdb.io/rest/user-watchlist
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
