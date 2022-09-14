@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class MovieAPIService {
 
   getMovieDetailFromSrv(movieId: number) : Observable<MovieDetail>{
-    let finalEndPoint: string = environment.theMovieDbBaseUrl+"movie/" + movieId + "?api_key=4076192d15cd9d20a1c57bb5d7ccef21";
+    let finalEndPoint: string = environment.theMovieDbBaseUrl+"movie/" + movieId + "?api_key=" + environment.apiKey;
     var returnVar = this.httpClient.get<MovieDetail>(finalEndPoint);
     return returnVar;
   }
