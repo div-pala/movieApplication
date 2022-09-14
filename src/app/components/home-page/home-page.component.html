@@ -3,8 +3,8 @@
   <div class="row content">
     <div class="col-sm-2 sidenav">
         <label for="criteria">Filter by Criteria</label>
-        <select name="criteria">
-            <option value="nowPlaying" selected (ngModelChange)='onOptionSelected($event)'> Now Playing</option>
+        <select name="criteria" (change)="onOptionSelected($event)">
+            <option value="nowPlaying" selected > Now Playing</option>
             <option value="popular"> Popular</option>
             <option value="topRated"> Top Rated</option>
             <option value="upcoming"> Upcoming </option>
