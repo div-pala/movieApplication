@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieDetail } from 'src/app/interfaces/movieDetail';
 import { MovieAPIService } from 'src/app/services/movie-api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-movie-detail',
@@ -10,12 +11,12 @@ import { MovieAPIService } from 'src/app/services/movie-api.service';
 })
 export class MovieDetailComponent implements OnInit {
 
-  errorMessage: string;
+  errorMessage: string = '';
   movieDetail: MovieDetail | undefined;
   movieId: number = 297761;
+  moviePosterPath: string = '';
 
   constructor(private movieApi: MovieAPIService, private changeDetectorRef: ChangeDetectorRef, private route: ActivatedRoute) {
-    this.errorMessage = '';
    }
 
   ngOnInit(): void {
@@ -37,7 +38,9 @@ export class MovieDetailComponent implements OnInit {
       }, () => {
         this.changeDetectorRef.detectChanges();
         this.movieDetail = this.movieDetail;
-        console.log(this.movieDetail);
+        this.moviePosterPath = environment.theMovieDbImageUrl + this.movieDetail?.backdrop_path;
+        // console.log(this.moviePosterPath);
+        // console.log(this.movieDetail);
       }
     );
   }
