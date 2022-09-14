@@ -1,1 +1,42 @@
-<p>home-page works!</p>
+
+<app-navigation></app-navigation>
+
+  
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+    </div>
+    <div class="col-sm-8 text-left"> 
+        <div *ngIf="movieList != undefined && movieResults != undefined && movieResults.length > 0">
+            <div *ngFor="let item of movieResults">
+                <p>{{item.title}} <span><button [routerLink]="['/movieDetail', item.id]">Details</button></span></p> 
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2 sidenav">
+      <div class="well">
+        <p>Placeholder for current movies</p>
+      </div>
+      <div class="well">
+        <p>Placeholder for current movies</p>
+      </div>
+      <div class="well">
+        <p>Placeholder for current movies</p>
+      </div>
+      <div class="well">
+        <p>Placeholder for current movies</p>
+      </div>
+      <div class="well">
+        <p>Placeholder for current movies</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<app-footer></app-footer>

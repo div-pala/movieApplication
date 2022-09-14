@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MovieDetail } from 'src/app/interfaces/movieDetail';
 import { MovieAPIService } from 'src/app/services/movie-api.service';
 
@@ -11,17 +12,22 @@ export class MovieDetailComponent implements OnInit {
 
   errorMessage: string;
   movieDetail: MovieDetail | undefined;
+  movieId: number = 297761;
 
-  constructor(private movieApi: MovieAPIService, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private movieApi: MovieAPIService, private changeDetectorRef: ChangeDetectorRef, private route: ActivatedRoute) {
     this.errorMessage = '';
    }
 
   ngOnInit(): void {
-    this.getMovieDetail(297761);
+    this.route.paramMap.subscribe((params) => {
+      this.movieId = Number(params.get('movieId'));
+      console.log(this.movieId);
+      this.getMovieDetail();
+    })
   }
 
-  getMovieDetail(movieId: number) : void {
-    this.movieApi.getMovieDetailFromSrv(movieId).subscribe(
+  getMovieDetail() : void {
+    this.movieApi.getMovieDetailFromSrv(this.movieId).subscribe(
       res => {
         if (res){
           this.movieDetail = res;
@@ -30,6 +36,7 @@ export class MovieDetailComponent implements OnInit {
         this.errorMessage = error;
       }, () => {
         this.changeDetectorRef.detectChanges();
+        this.movieDetail = this.movieDetail;
         console.log(this.movieDetail);
       }
     );
