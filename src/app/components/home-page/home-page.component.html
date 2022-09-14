@@ -1,1 +1,23 @@
-<p>home-page works!</p>
+<form>
+<div>
+    <label for="criteria">Filter by Criteria</label>
+        <select name="criteria">
+            <option value="nowPlaying" selected (ngModelChange)='onOptionSelected($event)'> Now Playing</option>
+            <option value="popular"> Popular</option>
+            <option value="topRated"> Top Rated</option>
+            <option value="upcoming"> Upcoming </option>
+        </select>
+</div>
+<div *ngIf="movieList.length != 0">
+    <h2>Now Playing Movies</h2> 
+    <table>
+        <tr>
+            <div *ngFor="let movie of movieList">
+                <td><img *ngIf="movie.poster_path" [src]="movie.poster_path" height="100px" width="100px"></td>
+                <td>{{movie.title}} </td>
+            </div>
+        </tr>
+    </table>
+   
+</div>
+</form>

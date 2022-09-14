@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { DetailsComponent } from './components/details/details.component';
 import { WatchListComponent } from './components/watch-list/watch-list.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { WatchListComponent } from './components/watch-list/watch-list.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

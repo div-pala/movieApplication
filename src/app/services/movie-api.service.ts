@@ -1,9 +1,42 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { MovieList } from '../interfaces/movies-list';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieAPIService {
 
-  constructor() { }
+  constructor(private httpClient:HttpClient) { }
+
+   //calls and returns the nowplaying movies
+  getNowPlayingMovies() : Observable<MovieList>{
+ /*   var returnVar = this.httpClient.get<MovieList>(environment.nowPlayingMoviesEndpoint, 
+      { headers: { 'apiKey' : '373d9fa52b137f4939b540d3074ddfba' }});
+       console.log("URL for getMovies is", returnVar);
+       return returnVar;
+*/
+      
+      return this.httpClient.get<MovieList>(environment.nowPlayingMoviesEndpoint);
+     
+  }
+
+  //calls and returns the popular movies
+  getPopularMovies() : Observable<MovieList>{
+       return this.httpClient.get<MovieList>(environment.popularMoviesEndpoint);    
+  }
+
+   //calls and returns the toprated movies
+  getTopratedMoviesEndpoint() : Observable<MovieList>{
+    return this.httpClient.get<MovieList>(environment.topratedMoviesEndpoint);    
+  }
+
+   //calls and returns the uocoming movies
+  getUpcomingMoviesEndpoint() : Observable<MovieList>{
+    return this.httpClient.get<MovieList>(environment.upcomingMoviesEndpoint);    
+  }
+
+
 }

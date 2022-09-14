@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+ // nowPlayingMoviesEndpoint:'https://api.themoviedb.org/3/movie/now_playing'
+  nowPlayingMoviesEndpoint:'https://api.themoviedb.org/3/movie/now_playing?api_key=373d9fa52b137f4939b540d3074ddfba',
+  popularMoviesEndpoint:'https://api.themoviedb.org/3/movie/popular?api_key=373d9fa52b137f4939b540d3074ddfba',
+  topratedMoviesEndpoint:'https://api.themoviedb.org/3/movie/top_rated?api_key=373d9fa52b137f4939b540d3074ddfba',
+  upcomingMoviesEndpoint:'https://api.themoviedb.org/3/movie/upcoming?api_key=373d9fa52b137f4939b540d3074ddfba'  
 };
 
 /*
