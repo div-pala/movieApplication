@@ -25,6 +25,7 @@ export class WatchListComponent implements OnInit {
     this.watchListApi.getWatchList().subscribe(res => {
       this.watchList = res;
       this.loading = false;
+      console.log(this.watchList);
     });
   }
 
