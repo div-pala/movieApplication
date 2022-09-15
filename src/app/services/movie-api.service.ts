@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { MovieDetail } from '../interfaces/movieDetail';
+import { MovieImages } from '../interfaces/movieImages';
 import { MovieList } from '../interfaces/movies-list';
 
 @Injectable({
@@ -18,6 +19,12 @@ export class MovieAPIService {
   getMovieDetailFromSrv(movieId: number) : Observable<MovieDetail>{
     let finalEndPoint: string = environment.theMovieDbBaseUrl + "movie/" + movieId + "?api_key=" + environment.apiKey;
     var resultSet = this.httpClient.get<MovieDetail>(finalEndPoint);
+    return resultSet;
+  }
+
+  getMovieImagesFromSrv(movieId: number) : Observable<MovieImages>{
+    let finalEndPoint: string = environment.theMovieDbBaseUrl + "movie/" + movieId + "/images?api_key=" + environment.apiKey;
+    var resultSet = this.httpClient.get<MovieImages>(finalEndPoint);
     return resultSet;
   }
 
