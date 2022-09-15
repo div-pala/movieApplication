@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { WatchList } from 'src/app/interfaces/watchList';
+import { ActivatedRoute } from '@angular/router';
+import {  WatchListRead } from 'src/app/interfaces/watchList';
 import { WatchlistService } from 'src/app/services/watchlist.service';
 
 @Component({
@@ -10,10 +11,10 @@ import { WatchlistService } from 'src/app/services/watchlist.service';
 export class WatchListComponent implements OnInit {
 
   //Propeties
-  watchList: WatchList[] = [];
+  watchList: WatchListRead[] = [];
   loading: boolean = true;
   //Constructor
-  constructor(private watchListApi: WatchlistService) { }
+  constructor(private watchListApi: WatchlistService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.loadWatchList();
@@ -29,10 +30,9 @@ export class WatchListComponent implements OnInit {
     });
   }
 
-  removeFromWatchList(movieId: number) : void{
-    console.log(movieId);
+  removeFromWatchList(_id: string) : void{
     this.loading = true;
-    this.watchListApi.removeFromWatchList(movieId).subscribe(() => {
+    this.watchListApi.removeFromWatchList(_id).subscribe(() => {
       this.loadWatchList();
     });
   }

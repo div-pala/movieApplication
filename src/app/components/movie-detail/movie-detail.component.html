@@ -3,18 +3,37 @@
 <div class="container-fluid text-center">    
     <div class="row content">
       <div class="col-sm-2 sidenav">
+        <!-- <p><a href="#">Link</a></p>
         <p><a href="#">Link</a></p>
-        <p><a href="#">Link</a></p>
-        <p><a href="#">Link</a></p>
+        <p><a href="#">Link</a></p> -->
       </div>
       <div class="col-sm-8 text-left"> 
         <div *ngIf="movieDetail != undefined">
-            <p>Movie Title:  {{movieDetail.title}}</p>
-            <p><img src="{{moviePosterPath}}"></p>
+
+            <div class="container">
+                <div class="row">           
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{moviePosterPath}}">
+                          <div class="card-body">
+                            <p class="card-text">Title: {{movieDetail.title}}</p>
+                            <p class="card-text">Overview: {{movieDetail.overview}}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                              <div class="btn-group">
+                                <button type="button" (click)="addToWatchList()" class="btn btn-sm btn-outline-secondary">Add to watchlist</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
         </div>
       </div>
       <div class="col-sm-2 sidenav">
-        <div class="well">
+        <!-- <div class="well">
           <p>Placeholder for current movies</p>
         </div>
         <div class="well">
@@ -28,7 +47,7 @@
         </div>
         <div class="well">
           <p>Placeholder for current movies</p>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
