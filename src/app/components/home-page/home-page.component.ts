@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MovieList, Result } from 'src/app/interfaces/movies-list';
+import { WatchListWrite } from 'src/app/interfaces/watchList';
 import { MovieAPIService } from 'src/app/services/movie-api.service';
+import { WatchlistService } from 'src/app/services/watchlist.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -19,10 +21,21 @@ export class HomePageComponent implements OnInit {
   title:string='Now Playing';
 
   //Constructor
-  constructor(private movieApi: MovieAPIService, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private movieApi: MovieAPIService, private watchListApi: WatchlistService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.getNowPlayingApiResponse();
+  }
+
+  //Methods
+  addToWatchList(event: Result): void{
+    var item: WatchListWrite = {
+      movieTitle: event.title,
+      movieGenre: 'action',
+      movieId: event.id,
+      moviePoster: event.poster_path
+    }
+    this.watchListApi.AddToWatchList(item).subscribe(list => {});
   }
   
   getNowPlayingApiResponse() {

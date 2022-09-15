@@ -2,12 +2,8 @@
 
 <div class="container-fluid text-center">    
     <div class="row content">
-      <div class="col-sm-2 sidenav">
-        <!-- <p><a href="#">Link</a></p>
-        <p><a href="#">Link</a></p>
-        <p><a href="#">Link</a></p> -->
-      </div>
-      <div class="col-sm-8 text-left"> 
+     
+      <div class="col-sm-10 text-left"> 
         <div *ngIf="movieDetail != undefined">
 
             <div class="container">
@@ -20,7 +16,7 @@
                             <p class="card-text">Overview: {{movieDetail.overview}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                               <div class="btn-group">
-                                <button type="button" (click)="addToWatchList()" class="btn btn-sm btn-outline-secondary">Add to watchlist</button>
+                                <button type="button" (click)="addToWatchList()" class="btn btn-warning">Add to watchlist</button>
                               </div>
                             </div>
                           </div>
@@ -28,26 +24,7 @@
                     </div>
                 </div>
             </div>
-            
-
         </div>
-      </div>
-      <div class="col-sm-2 sidenav">
-        <!-- <div class="well">
-          <p>Placeholder for current movies</p>
-        </div>
-        <div class="well">
-          <p>Placeholder for current movies</p>
-        </div>
-        <div class="well">
-          <p>Placeholder for current movies</p>
-        </div>
-        <div class="well">
-          <p>Placeholder for current movies</p>
-        </div>
-        <div class="well">
-          <p>Placeholder for current movies</p>
-        </div> -->
       </div>
     </div>
   </div>
