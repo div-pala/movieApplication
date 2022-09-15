@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MovieList, Result } from 'src/app/interfaces/movies-list';
 import { MovieAPIService } from 'src/app/services/movie-api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home-page',
@@ -14,6 +15,9 @@ export class HomePageComponent implements OnInit {
   movieList : MovieList | undefined;
   movieResults : Result[] | undefined;
   errorMessage: string = '';
+  moviePosterPath: string[] = [];
+  title:string='Now Playing';
+
   //Constructor
   constructor(private movieApi: MovieAPIService, private changeDetectorRef: ChangeDetectorRef) { }
 
@@ -22,17 +26,13 @@ export class HomePageComponent implements OnInit {
   }
   
   getNowPlayingApiResponse() {
-    this.movieApi.getNowPlayingMovies().subscribe((data) => {console.log(data),
-       console.log(data.results),
-       this.movieResults = data.results});
-    this.getMovieDetail();
-  }
-
-  //Methods
-  getMovieDetail() : void {
-    this.movieApi.getPopularMoviesFromSrv().subscribe(
-      res => {
+    this.movieApi.getNowPlayingMovies().subscribe(
+       res => {
         if (res){
+          for(var val of res.results){
+            val.poster_path = environment.theMovieDbImageUrl+val.poster_path;
+            this.moviePosterPath.push(val.poster_path);
+          }
           this.movieList = res;
         }
       }, error => {
@@ -46,24 +46,83 @@ export class HomePageComponent implements OnInit {
   }
 
   getPopularApiResponse(){
-    this.movieApi.getPopularMovies().subscribe((data) => {console.log(data),
-      console.log(data.results),
-      this.movieResults = data.results});
+    this.movieApi.getPopularMovies().subscribe(
+      res => {
+       if (res){
+        for(var val of res.results){
+          val.poster_path = environment.theMovieDbImageUrl+val.poster_path;
+          this.moviePosterPath.push(val.poster_path);
+        }
+        this.movieList = res;
+       }
+     }, error => {
+       this.errorMessage = error;
+     }, () => {
+       this.changeDetectorRef.detectChanges();
+       console.log(this.movieList);
+       this.movieResults = this.movieList?.results;
+     }
+   );
   }
 
-  getTopratedApiResponse(){
-    this.movieApi.getTopratedMoviesEndpoint().subscribe((data) => {console.log(data),
-      console.log(data.results),
-      this.movieResults = data.results});
+  getTopRatedApiResponse(){
+    this.movieApi.getTopratedMoviesEndpoint().subscribe(
+      res => {
+       if (res){
+        for(var val of res.results){
+          val.poster_path = environment.theMovieDbImageUrl+val.poster_path;
+          this.moviePosterPath.push(val.poster_path);
+        }
+        this.movieList = res;
+       }
+     }, error => {
+       this.errorMessage = error;
+     }, () => {
+       this.changeDetectorRef.detectChanges();
+       console.log(this.movieList);
+       this.movieResults = this.movieList?.results;
+     }
+   );
   }
 
   getUpcomingApiResponse(){
-    this.movieApi.getUpcomingMoviesEndpoint().subscribe((data) => {console.log(data),
-      console.log(data.results),
-      this.movieResults = data.results});
+    this.movieApi.getUpcomingMoviesEndpoint().subscribe(
+      res => {
+       if (res){
+        for(var val of res.results){
+          val.poster_path = environment.theMovieDbImageUrl+val.poster_path;
+          this.moviePosterPath.push(val.poster_path);
+        }
+        this.movieList = res;
+       }
+     }, error => {
+       this.errorMessage = error;
+     }, () => {
+       this.changeDetectorRef.detectChanges();
+       console.log(this.movieList);
+       this.movieResults = this.movieList?.results;
+     }
+   );
   }
 
-  onOptionSelected(option:any):void{
-    console.log("Value selected is", option);
+  onOptionClick(selectedValue:any):void {
+    const selectedOption:string = selectedValue.currentTarget.id;
+    switch(selectedOption){
+      case "nowPlaying": this.title = "Now Playing";
+                         this.getNowPlayingApiResponse();
+                         break;
+      case "popular": this.title = "Popular";
+                      this.getPopularApiResponse();
+                      break;
+      case "topRated": this.title = "Top Rated";
+                       this.getTopRatedApiResponse();
+                       break;
+      case "upcoming": this.title = "Upcoming";
+                       this.getUpcomingApiResponse();
+                       break;
+      default: break;this.title = "Now Playing";
+               this.getNowPlayingApiResponse();
+              
+    }    
   }
 }
