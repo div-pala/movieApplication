@@ -13,10 +13,12 @@ export class WatchListComponent implements OnInit {
   //Propeties
   watchList: WatchListRead[] = [];
   loading: boolean = true;
+  isActive: boolean = false;
   //Constructor
   constructor(private watchListApi: WatchlistService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.isActive = true;
     this.loadWatchList();
   }
 

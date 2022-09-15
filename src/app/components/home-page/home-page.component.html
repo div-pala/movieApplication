@@ -2,7 +2,7 @@
 
 <div class="container-fluid text-center">    
   <div class="row content">
-    <div class="col-sm-2 sidenav">
+    <div class="col-sm-1 sidenav">
         <label for="criteria">Filter by Criteria</label>
         <div class="col-sm-2 sidenav">
           <p><a id="nowPlaying" (click)="onOptionClick($event)">Now Playing</a></p>
@@ -11,18 +11,32 @@
           <p><a id="upcoming" (click)="onOptionClick($event)">Upcoming</a></p>
         </div>
     </div>
-    <div class="col-sm-8 text-left">
+    <div class="col-sm-10 text-left">
       <h3> {{title}} </h3>
         <div *ngIf="movieList != undefined && movieResults != undefined && movieResults.length > 0">
-            <div *ngFor="let movie of movieResults; index as i">
-                <p><img *ngIf="movie.poster_path" [src]="moviePosterPath[i]" height="200px" width="200px"></p>
-                <p>{{movie.title}} <span><button [routerLink]="['/movieDetail', movie.id]">Details</button></span></p> 
+            <div class="container">
+                <div class="row">
+                    <div *ngFor="let movie of movieResults; index as i">
+                        <div class="col-sm-4">
+                            <div class="panel panel-primary">
+                            <div class="panel-heading">{{movie.title}} 
+                                <button class="btn btn-success" [routerLink]="['/movieDetail', movie.id]">Details</button>
+                                <button class="btn btn-warning" (click)="addToWatchList(movie)">+</button>
+                            </div>
+                            <div class="panel-body">
+                                <img src="{{movie.poster_path}}" class="img-responsive" style="width:100%" alt="Image"></div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- <p><img *ngIf="movie.poster_path" [src]="moviePosterPath[i]" height="200px" width="200px"></p>
+                <p>{{movie.title}} <span><button [routerLink]="['/movieDetail', movie.id]">Details</button></span></p>  -->
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-sm-2 sidenav">
+    <!-- <div class="col-sm-2 sidenav">
       
-    </div>
+    </div> -->
   </div>
 </div>
 

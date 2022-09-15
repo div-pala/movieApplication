@@ -37,8 +37,6 @@ export class MovieDetailComponent implements OnInit {
     })
   }
 
- 
-
   //Methods
   getMovieDetail() : void {
     this.movieApi.getMovieDetailFromSrv(this.movieId).subscribe(
