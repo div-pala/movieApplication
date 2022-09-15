@@ -1,19 +1,20 @@
- 
+ <app-navigation></app-navigation>
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
         <label for="criteria">Filter by Criteria</label>
-        <select name="criteria" (change)="onOptionSelected($event)">
-            <option value="nowPlaying" selected > Now Playing</option>
-            <option value="popular"> Popular</option>
-            <option value="topRated"> Top Rated</option>
-            <option value="upcoming"> Upcoming </option>
-        </select>
+        <div class="col-sm-2 sidenav">
+          <p><a id="nowPlaying" (click)="onOptionClick($event)">Now Playing</a></p>
+          <p><a id="popular" (click)="onOptionClick($event)">Popular</a></p>
+          <p><a id="topRated" (click)="onOptionClick($event)">Top Rated</a></p>
+          <p><a id="upcoming" (click)="onOptionClick($event)">Upcoming</a></p>
+        </div>
     </div>
-    <div class="col-sm-8 text-left"> 
+    <div class="col-sm-8 text-left">
+      <h3> {{title}} </h3>
         <div *ngIf="movieList != undefined && movieResults != undefined && movieResults.length > 0">
-            <div *ngFor="let movie of movieResults">
-                <p><img *ngIf="movie.poster_path" [src]="movie.poster_path" height="100px" width="100px"></p>
+            <div *ngFor="let movie of movieResults; index as i">
+                <p><img *ngIf="movie.poster_path" [src]="moviePosterPath[i]" height="200px" width="200px"></p>
                 <p>{{movie.title}} <span><button [routerLink]="['/movieDetail', movie.id]">Details</button></span></p> 
             </div>
         </div>
