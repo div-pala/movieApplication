@@ -7,6 +7,13 @@
         <div *ngIf="movieDetail != undefined">
 
             <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div *ngIf="isSuccess != ''"  class="alert alert-success" role="alert">
+                            <span >{{isSuccess}}</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">           
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">

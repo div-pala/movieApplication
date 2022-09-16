@@ -36,29 +36,23 @@ export class MovieAPIService {
   }
 
    //calls and returns the nowplaying movies
-  getNowPlayingMovies() : Observable<MovieList>{
- /*   var returnVar = this.httpClient.get<MovieList>(environment.nowPlayingMoviesEndpoint, 
-      { headers: { 'apiKey' : '373d9fa52b137f4939b540d3074ddfba' }});
-       console.log("URL for getMovies is", returnVar);
-       return returnVar;
-*/
-      
-      return this.httpClient.get<MovieList>(environment.nowPlayingMoviesEndpoint);
+  getNowPlayingMovies(pageNo: number) : Observable<MovieList>{
+      return this.httpClient.get<MovieList>(environment.nowPlayingMoviesEndpoint + "&language=en-US&page=" + pageNo);
      
   }
 
   //calls and returns the popular movies
-  getPopularMovies() : Observable<MovieList>{
-       return this.httpClient.get<MovieList>(environment.popularMoviesEndpoint);    
+  getPopularMovies(pageNo: number) : Observable<MovieList>{
+       return this.httpClient.get<MovieList>(environment.popularMoviesEndpoint+ "&language=en-US&page=" + pageNo);    
   }
 
    //calls and returns the toprated movies
-  getTopratedMoviesEndpoint() : Observable<MovieList>{
-    return this.httpClient.get<MovieList>(environment.topratedMoviesEndpoint);    
+  getTopratedMoviesEndpoint(pageNo: number) : Observable<MovieList>{
+    return this.httpClient.get<MovieList>(environment.topratedMoviesEndpoint+ "&language=en-US&page=" + pageNo);    
   }
 
    //calls and returns the uocoming movies
-  getUpcomingMoviesEndpoint() : Observable<MovieList>{
-    return this.httpClient.get<MovieList>(environment.upcomingMoviesEndpoint);    
+  getUpcomingMoviesEndpoint(pageNo: number) : Observable<MovieList>{
+    return this.httpClient.get<MovieList>(environment.upcomingMoviesEndpoint+ "&language=en-US&page=" + pageNo);    
   }
 }

@@ -14,6 +14,7 @@ export class WatchListComponent implements OnInit {
   watchList: WatchListRead[] = [];
   loading: boolean = true;
   isActive: boolean = false;
+  isDeleted: string ='';
   //Constructor
   constructor(private watchListApi: WatchlistService, private route: ActivatedRoute) { }
 
@@ -36,6 +37,7 @@ export class WatchListComponent implements OnInit {
     this.loading = true;
     this.watchListApi.removeFromWatchList(_id).subscribe(() => {
       this.loadWatchList();
+      this.isDeleted = "Movie removed from WatchList."
     });
   }
 }

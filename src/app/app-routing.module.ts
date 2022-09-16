@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 import { WatchListComponent } from './components/watch-list/watch-list.component';
 
 const routes: Routes = [
@@ -9,9 +10,8 @@ const routes: Routes = [
   {path: 'HomePage', component:HomePageComponent},
   {path: 'movieDetail/:movieId', component:MovieDetailComponent},
   {path: 'MyWatchList', component:WatchListComponent},
-  {path: '', redirectTo:'/HomePage', pathMatch:'full'}
-  //TODO
-  // {path: '**', component: NotFoundComponent}
+  {path: '', redirectTo:'/HomePage', pathMatch:'full'},
+  {path: '**', component: NotfoundComponent}
 ];
 
 @NgModule({
