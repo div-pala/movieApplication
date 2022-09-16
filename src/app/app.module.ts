@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FooterComponent } from './components/footer/footer.component';
     WatchListComponent,
     MovieDetailComponent,
     NavigationComponent,
-    FooterComponent
+    FooterComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,13 @@
         <div *ngIf="watchList.length > 0" >
             <div class="container">
                 <div class="row">
+                    <div class="col-md-4">
+                        <div *ngIf="isDeleted != ''"  class="alert alert-danger" role="alert">
+                            <span >{{isDeleted}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div *ngFor="let item of watchList"> 
                         <div class="col-sm-4">
                             <div class="panel panel-primary">

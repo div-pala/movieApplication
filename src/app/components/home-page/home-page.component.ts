@@ -19,12 +19,42 @@ export class HomePageComponent implements OnInit {
   errorMessage: string = '';
   moviePosterPath: string[] = [];
   title:string='Now Playing';
+  isSuccess: string = '';
+  selectedOption:string = '';
+  pageNumber: number = 1;
 
   //Constructor
-  constructor(private movieApi: MovieAPIService, private watchListApi: WatchlistService, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private movieApi: MovieAPIService, private watchListApi: WatchlistService, private changeDetectorRef: ChangeDetectorRef) { 
+    this.pageNumber = 1;
+    this.selectedOption ="nowPlaying";
+  }
 
   ngOnInit(): void {
     this.getNowPlayingApiResponse();
+  }
+
+  counter(i: number) {
+    return new Array(i);
+  }
+
+  getListFromPage(pageNo: number) : void {
+    this.pageNumber = pageNo;
+    
+    switch(this.selectedOption){
+      case "nowPlaying": this.title = "Now Playing";
+                         this.getNowPlayingApiResponse();
+                         break;
+      case "popular": this.title = "Popular";
+                      this.getPopularApiResponse();
+                      break;
+      case "topRated": this.title = "Top Rated";
+                       this.getTopRatedApiResponse();
+                       break;
+      case "upcoming": this.title = "Upcoming";
+                       this.getUpcomingApiResponse();
+                       break;
+    }  
+
   }
 
   //Methods
@@ -35,11 +65,13 @@ export class HomePageComponent implements OnInit {
       movieId: event.id,
       moviePoster: event.poster_path
     }
-    this.watchListApi.AddToWatchList(item).subscribe(list => {});
+    this.watchListApi.AddToWatchList(item).subscribe(list => {}, error => {}, () => {
+      this.isSuccess = "Added to WatchList!!!";
+    });
   }
   
   getNowPlayingApiResponse() {
-    this.movieApi.getNowPlayingMovies().subscribe(
+    this.movieApi.getNowPlayingMovies(this.pageNumber).subscribe(
        res => {
         if (res){
           for(var val of res.results){
@@ -52,14 +84,14 @@ export class HomePageComponent implements OnInit {
         this.errorMessage = error;
       }, () => {
         this.changeDetectorRef.detectChanges();
-        console.log(this.movieList);
+        // console.log(this.movieList);
         this.movieResults = this.movieList?.results;
       }
     );
   }
 
-  getPopularApiResponse(){
-    this.movieApi.getPopularMovies().subscribe(
+  getPopularApiResponse() {
+    this.movieApi.getPopularMovies(this.pageNumber).subscribe(
       res => {
        if (res){
         for(var val of res.results){
@@ -79,7 +111,7 @@ export class HomePageComponent implements OnInit {
   }
 
   getTopRatedApiResponse(){
-    this.movieApi.getTopratedMoviesEndpoint().subscribe(
+    this.movieApi.getTopratedMoviesEndpoint(this.pageNumber).subscribe(
       res => {
        if (res){
         for(var val of res.results){
@@ -99,7 +131,7 @@ export class HomePageComponent implements OnInit {
   }
 
   getUpcomingApiResponse(){
-    this.movieApi.getUpcomingMoviesEndpoint().subscribe(
+    this.movieApi.getUpcomingMoviesEndpoint(this.pageNumber).subscribe(
       res => {
        if (res){
         for(var val of res.results){
@@ -119,8 +151,8 @@ export class HomePageComponent implements OnInit {
   }
 
   onOptionClick(selectedValue:any):void {
-    const selectedOption:string = selectedValue.currentTarget.id;
-    switch(selectedOption){
+    this.selectedOption = selectedValue.currentTarget.id;
+    switch(this.selectedOption){
       case "nowPlaying": this.title = "Now Playing";
                          this.getNowPlayingApiResponse();
                          break;

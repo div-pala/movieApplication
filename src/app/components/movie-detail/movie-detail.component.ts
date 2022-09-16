@@ -1,3 +1,4 @@
+import { isNgContainer } from '@angular/compiler';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieDetail } from 'src/app/interfaces/movieDetail';
@@ -22,6 +23,7 @@ export class MovieDetailComponent implements OnInit {
   movieImages: MovieImages | undefined;
   movieBackdrops: Backdrop[] | undefined;
   backdropFinalUrl: BackdropFinalUrl[]  = [];
+  isSuccess: string = '';
 
   //Constructor
   constructor(private movieApi: MovieAPIService, 
@@ -83,8 +85,13 @@ export class MovieDetailComponent implements OnInit {
       movieGenre: this.movieDetail?.genres[0].name,
       moviePoster: this.moviePosterPath
     }
-    console.log('add to watchlist'+item.moviePoster);
-    this.watchListApi.AddToWatchList(item).subscribe(list => {});
+    // console.log('add to watchlist'+item.moviePoster);
+    this.watchListApi.AddToWatchList(item).subscribe(list => {}, error => {}, () => {
+      this.isSuccess = "Added to WatchList!!!";
+      // alert("Added to WatchList!!");
+    });
+    
+
   }
 
 
